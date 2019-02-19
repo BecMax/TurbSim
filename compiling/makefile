@@ -13,8 +13,8 @@
 #================================================================================#
 
    # 32-bit or 64-bit?
-BITS = 32
-#BITS = 64
+#BITS = 32
+BITS = 64
 
 
    # Location of source files for TurbSim and its dependencies.
@@ -42,7 +42,10 @@ endif
 FC      = gfortran
 
 FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input
-LDFLAGS = -O2 -m$(BITS) -fbacktrace -Wl,--large-address-aware
+LDFLAGS = -O2 -m$(BITS) -fbacktrace
+
+#FFLAGS  = -O2 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input
+#LDFLAGS = -O2 -m$(BITS) -fbacktrace -Wl,--large-address-aware
 
 #FFLAGS  = -O0 -m$(BITS) -fbacktrace -ffree-line-length-none -x f95-cpp-input -g -pg
 #LDFLAGS = -O0 -m$(BITS) -fbacktrace -Wl,--stack=999999999,--large-address-aware -g -pg
