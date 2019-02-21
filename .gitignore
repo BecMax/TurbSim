@@ -54,19 +54,25 @@ BuildLog.htm
 *.tar
 
 # Turbsim files
-.inp
-.bts
-.wnd
-.sum
-.u
-.v
-.w
-.twr
-.log
-.tex
-.eps
-.jpg
-.png
+*.inp
+*.bts
+*.wnd
+*.sum
+*.u
+*.v
+*.w
+*.twr
+*.log
+*.tex
+*.eps
+*.jpg
+*.png
+*.md5
+*.dpth
+*.gz
+*.aux
+*.auxlock
+*.stackdump
 
 
 # NWTC web developer
