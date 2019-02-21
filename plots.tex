@@ -1,0 +1,35 @@
+\documentclass{article}
+  \usepackage{tikz}
+  \usetikzlibrary{external}
+  \tikzexternalize % activate!
+  \tikzset{external/force remake}
+  \usepackage{pgfplots}
+  \pgfplotsset{compat=newest}
+  %% the following commands are needed for some matlab2tikz features
+  \usetikzlibrary{plotmarks}
+  \usetikzlibrary{arrows.meta}
+  \usepgfplotslibrary{patchplots}
+  \usepackage{grffile}
+  \usepackage{amsmath}
+  %\usepackage{standalone}
+
+  %% you may also want the following commands
+  %\pgfplotsset{plot coordinates/math parser=false}
+  %\newlength\figureheight
+  %\newlength\figurewidth
+  \newlength\fheight 
+  \newlength\fwidth 
+  \setlength\fheight{10cm} 
+  \setlength\fwidth{20cm}
+  
+  \pgfplotsset{
+    scaled ticks= false,
+    legend style={font=\footnotesize},
+    label style={font=\footnotesize},
+    tick label style={font=\footnotesize},
+   }
+
+\begin{document}
+\centering
+  \input{NTM_compare_bts.tex}
+\end{document}

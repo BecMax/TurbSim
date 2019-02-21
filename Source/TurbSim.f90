@@ -17,6 +17,7 @@ PROGRAM TurbSim
    ! V1.06.00        21-Sep-2012  L. Kilcher & B. Jonkman (NWTC Library v1.04.01)
    ! v1.07.00a-bjj    9-Jul-2014  B. Jonkman  (NWTC Library v1.04.02a-bjj)
    ! v2.00.00a-bjj      Oct-2014  B. Jonkman  (NWTC Library 2.0)
+   ! v2.01.00-max      Feb-2019  M. Becker (Deutsche Windguard)  (NWTC Library 2.0)
    !
    ! This program simulates a full field of turbulent winds at points in space
    ! in a rectangular Cartesian plane perpendicular to the mean wind direction.

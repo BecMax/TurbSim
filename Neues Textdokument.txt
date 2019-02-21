@@ -1,0 +1,1 @@
+(p%IEC%IEC_WindType > IEC_ETM .AND. TRIM(p%IEC%IECTurbE) /= "S")

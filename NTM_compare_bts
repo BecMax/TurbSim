@@ -1,0 +1,76 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=2.542in,
+height=4.754in,
+at={(1.011in,0.642in)},
+scale only axis,
+xmin=37.5,
+xmax=40.5,
+xlabel style={font=\color{white!15!black}},
+xlabel={Mean Total Wind Speed (m/s)},
+ymin=0,
+ymax=200,
+ylabel style={font=\color{white!15!black}},
+ylabel={Height above ground (m)},
+axis background/.style={fill=white},
+title style={font=\bfseries},
+title={TurbSim Binary Full-Field File Comparisons: NTM\_new.bts and NTM\_orig.bts},
+legend style={legend cell align=left, align=left, legend plot pos=left, draw=white!15!black}
+]
+\addplot [color=blue, mark=+, mark options={solid, blue}]
+  table[row sep=crcr]{%
+40.1371974719397	17.5\\
+40.1355246071977	162.5\\
+};
+\addlegendentry{NTM\_new.bts}
+
+\addplot [color=red, dotted, mark=o, mark options={solid, red}]
+  table[row sep=crcr]{%
+37.6267570484978	17.5\\
+37.6252553126516	162.5\\
+};
+\addlegendentry{NTM\_orig.bts}
+
+\end{axis}
+
+\begin{axis}[%
+width=2.542in,
+height=4.754in,
+at={(4.497in,0.642in)},
+scale only axis,
+xmin=-0.12,
+xmax=-0,
+xlabel style={font=\color{white!15!black}},
+xlabel={Mean Horizontal Wind Angle (deg, ccw from +x)},
+ymin=0,
+ymax=200,
+ylabel style={font=\color{white!15!black}},
+ylabel={Height above ground (m)},
+axis background/.style={fill=white},
+title style={font=\bfseries},
+title={TurbSim Binary Full-Field File Comparisons: NTM\_new.bts and NTM\_orig.bts},
+legend style={legend cell align=left, align=left, legend plot pos=left, draw=white!15!black}
+]
+\addplot [color=blue, mark=+, mark options={solid, blue}]
+  table[row sep=crcr]{%
+-0.107501441598489	17.5\\
+-0.0091277326812623	162.5\\
+};
+\addlegendentry{NTM\_new.bts}
+
+\addplot [color=red, dotted, mark=o, mark options={solid, red}]
+  table[row sep=crcr]{%
+-0.105249265987771	17.5\\
+-0.00917516090990639	162.5\\
+};
+\addlegendentry{NTM\_orig.bts}
+
+\end{axis}
+\end{tikzpicture}%
