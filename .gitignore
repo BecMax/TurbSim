@@ -53,8 +53,26 @@ BuildLog.htm
 *.tar.gz
 *.tar
 
+# Turbsim files
+.inp
+.bts
+.wnd
+.sum
+.u
+.v
+.w
+.twr
+.log
+.tex
+.eps
+.jpg
+.png
+
+
 # NWTC web developer
 /ArcFiles.txt
 /SourceFiles.txt
 /ArcWin.txt
 /Archive.bat
+/NWTC_Library/
+/matlab2tikz/
