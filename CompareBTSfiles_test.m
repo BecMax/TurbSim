@@ -6,9 +6,9 @@ function CompareBTSfiles_test
     comp = 'UVW';   
 	addpath ("/home/max.becker/git/TurbSim/CertTest")
 	addpath ("/home/max.becker/git/TurbSim/matlab2tikz/src")
-	FigureFilename = 'NTM_compare_bts'
-	FileName1 = 'NTM_new.bts'
-	FileName2 = 'NTM_orig.bts' 
+	FigureFilename = '08_a_compare_bts'
+	FileName1 = '08_a_new.bts'
+	FileName2 = '08_a_orig.bts' 
     fprintf( '\n\n\n%s\n\n', 'Comparing TurbSim binary *.bts files...');
     fprintf( '%2s%10s = %s\n', '','File 1 ', FileName1);
     fprintf( '%2s%10s = %s\n', '','File 2 ', FileName2);

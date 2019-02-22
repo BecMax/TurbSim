@@ -587,7 +587,7 @@ CALL DefaultMetBndryCndtns(p)     ! Requires turbModel (some require RICH_NO, wh
    ! ------------ Read in the reference wind speed. -----------------------------------------------------
    !PRINT *,'Check this function'
    !PRINT *,INDEX('TU',p%met%WindProfileType(1:1))
-   IsUnusedParameter = p%IEC%IEC_WindType > IEC_ETM .OR. INDEX('TU',p%met%WindProfileType(1:1)) > 0 ! p%IEC%IEC_WindType > IEC_ETM == EWM models and not S class
+   IsUnusedParameter = p%IEC%IEC_WindType > IEC_ETM .OR. INDEX('TU',p%met%WindProfileType(1:1)) > 0 ! p%IEC%IEC_WindType > IEC_ETM == EWM models
    !PRINT *,'URef is an unused variable is'
    !PRINT *,IsUnusedParameter
    CALL ReadRVarDefault( UI, InFile, p%met%URef, "URef", "Reference wind speed [m/s]", UnEc, getDefaultURef, ErrStat2, ErrMsg2, &
@@ -869,7 +869,9 @@ CALL DefaultMetBndryCndtns(p)     ! Requires turbModel (some require RICH_NO, wh
       ! Default coherence parameters and IEC scaling parameters   
    CALL CalcIECScalingParams(p%IEC, p%grid%HubHt, p%UHub, p%met%InCDec, p%met%InCohB, p%met%TurbModel_ID, p%met%IsIECModel, ErrStat2, ErrMsg2)                  
       CALL SetErrStat( ErrStat2, ErrMsg2, ErrStat, ErrMsg, RoutineName)      
-      
+   
+   !PRINT *,'IsIECModel is:' 
+   !PRINT*,p%met%IsIECModel	  
    IF ( .NOT. p%met%IsIECModel  ) THEN
       CALL GetDefaultCoh( p%met%TurbModel_ID, p%met%RICH_NO, p%UHub, p%grid%HubHt, p%met%IncDec, p%met%InCohB )
    END IF
@@ -986,6 +988,7 @@ CALL DefaultMetBndryCndtns(p)     ! Requires turbModel (some require RICH_NO, wh
    IF ( p%met%COHEXP <  0.0_ReKi) CALL SetErrStat( ErrID_Fatal, 'The coherence exponent must be non-negative.', ErrStat, ErrMsg, RoutineName)
 
    DO I = 1,3
+      !PRINT*,p%met%InCDec(I)
       IF ( p%met%InCDec(I) <= 0.0_ReKi ) CALL SetErrStat( ErrID_Fatal, 'The '//Comp(I)//'-component coherence decrement must be a positive number.', ErrStat, ErrMsg, RoutineName)
    END DO
            
@@ -4121,8 +4124,8 @@ SUBROUTINE ProcessLine_IEC_WindType(Line, p, ErrStat, ErrMsg)
                          'extreme turbulence and extreme wind types. (i.e. "1ETM")', ErrStat, ErrMsg, 'ProcessLine_IEC_WindType')
          ENDIF
 
-         IF ( p%IEC%NumTurbInp .AND. p%IEC%Vref /= 0.) THEN
-			
+         !IF ( p%IEC%NumTurbInp .AND. p%IEC%Vref /= 0.) THEN
+		IF ( p%IEC%NumTurbInp .AND. TRIM(p%IEC%IECTurbE) /= "S") THEN
             CALL SetErrStat( ErrID_Fatal, 'When the turbulence intensity is entered as a percent, '//&
                              'the IEC wind type must be "NTM".', ErrStat, ErrMsg, 'ProcessLine_IEC_WindType')
          ENDIF
@@ -5170,6 +5173,9 @@ SUBROUTINE CalcIECScalingParams( p_IEC, HubHt, UHub, InCDec, InCohB, TurbModel_I
    
    IF ( p_IEC%NumTurbInp )  THEN
    
+      !PRINT*,'CHECK'
+	  !PRINT*,p_IEC%IECedition
+   
          ! user specified a particular percent TI:
          
       p_IEC%TurbInt     = 0.01*p_IEC%PerTurbInt
@@ -5196,7 +5202,6 @@ SUBROUTINE CalcIECScalingParams( p_IEC, HubHt, UHub, InCDec, InCohB, TurbModel_I
 		p_IEC%TurbInt  = p_IEC%SigmaIEC(1)/UHub
 		
 		CASE DEFAULT ! We are doing the normal NTM
-        RETURN
 			
       END SELECT		
 		
@@ -5205,7 +5210,8 @@ SUBROUTINE CalcIECScalingParams( p_IEC, HubHt, UHub, InCDec, InCohB, TurbModel_I
 
    ELSE
 
-      
+   
+	  
       SELECT CASE (p_IEC%IECedition)
 
          CASE ( 2 )
@@ -5271,7 +5277,9 @@ SUBROUTINE CalcIECScalingParams( p_IEC, HubHt, UHub, InCDec, InCohB, TurbModel_I
    ! note PLExp for IEC is set elsewhere
    
       ! IEC turbulence scale parameter, Lambda(1), and IEC coherency scale parameter, LC
-
+   
+   !PRINT*,p_IEC%IECedition
+	  
    IF ( p_IEC%IECedition == 2 ) THEN  
       
          ! section 6.3.1.3 Eq. 9
@@ -5296,6 +5304,8 @@ SUBROUTINE CalcIECScalingParams( p_IEC, HubHt, UHub, InCDec, InCohB, TurbModel_I
 
       p_IEC%LC = 8.1*p_IEC%Lambda(1)
       InCDec = (/ 12.00_ReKi, HUGE(p_IEC%LC), HUGE(p_IEC%LC) /)   ! u-, v-, and w-component coherence decrement for IEC Ed. 3
+	  
+	  !PRINT*,InCDec(1)
 
    ENDIF
    
